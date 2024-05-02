@@ -211,46 +211,81 @@ class _DrListState extends State<DrList> {
         value: DrListModel(),
         child: Scaffold(
           appBar: AppBar(
-            backgroundColor: Colors.transparent,
-            title: Text('${widget.category} Doctors'),
+            centerTitle: true,
+            title: FittedBox(
+              fit: BoxFit.contain,
+              child: Text(
+                '${widget.category} Doctors',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontFamily: 'Playfair',
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            flexibleSpace: Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    Color(0xFF484848), // Dark gray color
+                    Color(0xFF000000), // Black color
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+              ),
+            ),
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(
+                bottom: Radius.circular(20),
+              ),
+            ),
+            elevation: 8,
+            shadowColor: Colors.black.withOpacity(0.5),
           ),
           backgroundColor: backgroundColor,
           body: Column(
             children: [
               const Opacity(opacity: .1),
               Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 15, vertical: 30),
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 34),
-                    height: 60,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(100),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(.35),
-                          spreadRadius: 7,
-                          blurRadius: 20,
-                          blurStyle: BlurStyle.normal,
-                          offset: Offset(0, 0),
-                        ),
-                      ],
-                    ),
-                    child: TextField(
-                      onChanged: (value) {
-                        setState(() {
-                          searchQuery = value.toLowerCase();
-                        });
-                      },
-                      decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.search),
-                        hintText: 'Search Docror . . . .',
-                        hintStyle: TextStyle(color: Colors.grey),
-                        border: InputBorder.none,
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 25, vertical: 20), // Reduce vertical padding
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 20, vertical: 0), // Reduce vertical padding
+                  height: 50, // Reduce the height
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[800],
+                    borderRadius: BorderRadius.circular(
+                        20), // Adjust border radius to match the new height
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.black54,
+                        blurRadius: 10,
+                        spreadRadius: 2,
+                        offset: Offset(0, 3),
                       ),
+                    ],
+                  ),
+                  child: TextField(
+                    onChanged: (value) {
+                      setState(() {
+                        searchQuery = value.toLowerCase();
+                      });
+                    },
+                    style: const TextStyle(color: Colors.white),
+                    decoration: InputDecoration(
+                      prefixIcon:
+                          const Icon(Icons.search, color: Colors.white70),
+                      hintText: 'Search Doctor...',
+                      hintStyle: TextStyle(color: Colors.grey[500]),
+                      border: InputBorder.none,
                     ),
-                  )),
+                  ),
+                ),
+              ),
               Expanded(
                 child: Consumer<DrListModel>(builder: (context, model, child) {
                   if (model.documents.isEmpty) {
@@ -300,18 +335,12 @@ class _DrListState extends State<DrList> {
                       ),
                     );
                   }
-                  return ListWheelScrollView.useDelegate(
-                    itemExtent: 350, // Adjust the height of each item as needed
-                    physics: FixedExtentScrollPhysics(),
-                    diameterRatio: 6.5,
-                    perspective: 0.004,
-                    childDelegate: ListWheelChildBuilderDelegate(
-                      childCount: sortedDocs.length,
-                      builder: (context, index) {
-                        DocumentSnapshot document = sortedDocs[index];
-                        return DoctorListItem(document, searchQuery);
-                      },
-                    ),
+                  return ListView.builder(
+                    itemCount: sortedDocs.length,
+                    itemBuilder: (context, index) {
+                      DocumentSnapshot document = sortedDocs[index];
+                      return DoctorListItem(document, searchQuery);
+                    },
                   );
                 }),
               ),

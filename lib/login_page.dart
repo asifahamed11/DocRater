@@ -116,8 +116,7 @@ void showSuccessAnimation(BuildContext context) {
         .withOpacity(0.5), // Set the barrier color to a semi-transparent black
     builder: (context) {
       return Dialog(
-        backgroundColor: Colors
-            .transparent, // Set the background color of the Dialog to transparent
+        backgroundColor: Colors.transparent,
         child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5), // Set the blur radius
           child: ColorFiltered(

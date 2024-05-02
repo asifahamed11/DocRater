@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:app/CatBlock.dart';
 import 'package:app/AddDoctorScreen.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class HomeView extends StatefulWidget {
   final String userName;
@@ -12,7 +13,7 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView>
-    with AutomaticKeepAliveClientMixin {
+    with AutomaticKeepAliveClientMixin, TickerProviderStateMixin {
   final TextEditingController _searchController = TextEditingController();
   List<Map<String, String>> filteredCategories = [];
   static const List<Map<String, String>> categories = [
@@ -161,33 +162,44 @@ class _HomeViewState extends State<HomeView>
 
   @override
   Widget build(BuildContext context) {
-    super.build(context); // For AutomaticKeepAliveClientMixin
+    super.build(context);
     return Scaffold(
-      backgroundColor: Colors.grey[100],
-      body: SingleChildScrollView(
-        // Added ScrollView to prevent overflow
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildHeader(),
-            _buildSearchField(),
-            _buildCategoriesGrid(),
-            _buildAddDoctorButton(),
-          ],
-        ),
-      ),
-    );
+        backgroundColor: Colors.white,
+        body: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.grey, Colors.white],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
+          ),
+          child: SingleChildScrollView(
+            // Added ScrollView to prevent overflow
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildHeader(),
+                _buildSearchField(),
+                _buildCategoriesGrid(),
+                //_buildAddDoctorButton(),***************
+              ],
+            ),
+          ),
+        ));
   }
 
   Widget _buildHeader() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 60),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 50),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             "Hello ${widget.userName}",
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            style: GoogleFonts.montserrat(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           SizedBox(height: 10),
           Text(
@@ -214,7 +226,7 @@ class _HomeViewState extends State<HomeView>
           borderRadius: BorderRadius.circular(100),
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(.3),
+              color: Colors.black12.withOpacity(.1),
               spreadRadius: 7,
               blurRadius: 20,
               blurStyle: BlurStyle.normal,
@@ -226,7 +238,7 @@ class _HomeViewState extends State<HomeView>
           controller: _searchController,
           onChanged: _onSearchTextChanged,
           decoration: InputDecoration(
-            prefixIcon: Icon(Icons.search),
+            prefixIcon: Icon(Icons.search, color: Colors.black26),
             hintText: 'Search Category . . . .',
             hintStyle: TextStyle(color: Colors.grey),
             border: InputBorder.none,
@@ -244,7 +256,7 @@ class _HomeViewState extends State<HomeView>
         children: [
           Text(
             "Categories",
-            style: TextStyle(
+            style: GoogleFonts.lato(
               fontSize: 30,
               fontWeight: FontWeight.bold,
             ),
@@ -261,10 +273,24 @@ class _HomeViewState extends State<HomeView>
               ),
               itemCount: filteredCategories.length,
               itemBuilder: (context, index) {
-                return CatBlock(
-                  name: filteredCategories[index]["name"]!,
-                  imageUrl: filteredCategories[index]["imageUrl"]!,
-                );
+                return ScaleTransition(
+                    // 5. Add subtle animations and transitions
+                    scale: Tween<double>(
+                      begin: 0.0,
+                      end: 1.0,
+                    ).animate(
+                      CurvedAnimation(
+                        parent: AnimationController(
+                          vsync: this,
+                          duration: Duration(milliseconds: 400),
+                        )..forward(),
+                        curve: Curves.easeInOut,
+                      ),
+                    ),
+                    child: CatBlock(
+                      name: filteredCategories[index]["name"]!,
+                      imageUrl: filteredCategories[index]["imageUrl"]!,
+                    ));
               },
             ),
           ),
@@ -273,6 +299,7 @@ class _HomeViewState extends State<HomeView>
     );
   }
 
+/*
   Widget _buildAddDoctorButton() {
     return Center(
       child: ElevatedButton.icon(
@@ -289,7 +316,7 @@ class _HomeViewState extends State<HomeView>
       ),
     );
   }
-
+*/
   void _onSearchTextChanged(String value) {
     setState(() {
       filteredCategories = categories

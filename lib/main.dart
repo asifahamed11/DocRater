@@ -1,6 +1,5 @@
 // Import necessary packages
-import 'package:app/HomeView.dart';
-import 'package:app/login_page.dart'; // Importing the LoginPage widget
+import 'package:app/welcome_page.dart';
 import 'package:firebase_core/firebase_core.dart'; // Importing Firebase Core package
 import 'package:flutter/material.dart';
 
@@ -26,10 +25,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false, // Disable debug banner
       home: Builder(
         // Builder widget to access context
-        builder: (context) => const LoginPage(
-          // Creating an instance of LoginPage widget with a default username
-          userName: "your_default_user_name",
-        ),
+        builder: (context) => WelcomePage(
+            // Creating an instance of LoginPage widget with a default username
+            ),
       ),
     );
   }
