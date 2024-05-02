@@ -3,18 +3,16 @@ import 'package:flutter/material.dart'; // Flutter material library for UI compo
 import 'package:firebase_auth/firebase_auth.dart'; // Firebase authentication package
 import 'package:app/UIhelper.dart'; // Custom UI helper class
 import 'package:app/login_page.dart'; // Login page widget
+import 'package:flutter_svg/svg.dart';
 
-// Define a stateful widget for the sign-up page
 class SignupPage extends StatefulWidget {
-  const SignupPage({Key? key}); // Constructor for SignupPage widget
+  const SignupPage({Key? key}) : super(key: key);
+
   @override
-  State<SignupPage> createState() =>
-      _SignupPageState(); // Create state for SignupPage
+  State<SignupPage> createState() => _SignupPageState();
 }
 
-// State class for the sign-up page
 class _SignupPageState extends State<SignupPage> {
-  // Text editing controllers for email, password, and name fields
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController nameController = TextEditingController();
@@ -82,33 +80,82 @@ class _SignupPageState extends State<SignupPage> {
         RegExp(r'[!@#$%^&*(),.?":{}|<>]').hasMatch(password);
   }
 
-  // Build method to create the UI
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Sign Up Page"), // App bar title
-        centerTitle: true,
+        leading: IconButton(
+          icon: SvgPicture.asset('assets/images/back_arrow.svg'),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          // Custom text field for name input
-          UiHelper.CustomTextfield(nameController, Icons.person, "Name", false),
-          // Custom text field for email input
-          UiHelper.CustomTextfield(emailController, Icons.mail, "Email", false),
-          // Custom text field for password input
-          UiHelper.CustomTextfield(
-              passwordController, Icons.lock, "Password", true),
-          const SizedBox(height: 10),
-          // Custom button for sign-up action
-          UiHelper.CustomButton(() {
-            _signUP(
-                emailController.text.toString(),
-                passwordController.text.toString(),
-                nameController.text.toString());
-          }, "Register")
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              "   Register",
+              style: TextStyle(fontSize: 40),
+            ),
+            const SizedBox(height: 5),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: const Text(
+                "     Create new account to get \n     started.",
+                style: TextStyle(fontSize: 25, color: Colors.black),
+              ),
+            ),
+            const SizedBox(height: 50),
+            UiHelper.CustomTextfield(
+                nameController, Icons.person, "Name", false),
+            UiHelper.CustomTextfield(
+                emailController, Icons.mail, "Email", false),
+            UiHelper.CustomTextfield(
+                passwordController, Icons.lock, "Password", true),
+            const SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Already have an account?",
+                  style: TextStyle(fontSize: 15),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const LoginPage(
+                          userName: "",
+                        ),
+                      ),
+                    );
+                  },
+                  child: const Text(
+                    "Log In",
+                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 100),
+            Center(
+              child: UiHelper.CustomButton(
+                () {
+                  _signUP(
+                    emailController.text.toString(),
+                    passwordController.text.toString(),
+                    nameController.text.toString(),
+                  );
+                },
+                "Register",
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

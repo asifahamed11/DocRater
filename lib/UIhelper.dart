@@ -39,7 +39,7 @@ class UiHelper {
       // Sized box to set button size
       child: SizedBox(
         height: 50, // Button height
-        width: 300, // Button width
+        width: 200, // Button width
         // Elevated button widget
         child: ElevatedButton(
           onPressed: () {
@@ -47,7 +47,7 @@ class UiHelper {
           },
           style: ElevatedButton.styleFrom(
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(50), // Button shape
+              borderRadius: BorderRadius.circular(20), // Button shape
             ),
             backgroundColor: const Color(0xFF17203A), // Button background color
             elevation: 4, // Button elevation

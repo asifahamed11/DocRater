@@ -80,22 +80,22 @@ class _ButtonRowState extends State<ButtonRow> {
       height: 75,
       decoration: BoxDecoration(
         color: Colors.black87,
-        borderRadius: BorderRadius.circular(22),
+        borderRadius: BorderRadius.circular(50),
       ),
       child: Row(
         children: [
           Expanded(
             child: SizedBox(
-              width: MediaQuery.of(context).size.width * 0.5,
+              width: MediaQuery.of(context).size.width * 0.9,
               child: TextButton(
                 style: TextButton.styleFrom(
                   backgroundColor: _isRegisterButtonSelected
-                      ? Colors.white
+                      ? Colors.grey.shade200
                       : Colors.transparent,
                   foregroundColor:
                       _isRegisterButtonSelected ? Colors.black87 : Colors.white,
                   padding: EdgeInsets.symmetric(vertical: 16),
-                  minimumSize: Size(double.infinity, 70),
+                  minimumSize: Size(double.infinity, 200),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),
@@ -121,16 +121,16 @@ class _ButtonRowState extends State<ButtonRow> {
           ),
           Expanded(
             child: SizedBox(
-              width: MediaQuery.of(context).size.width * 0.4,
+              width: MediaQuery.of(context).size.width * 0.9,
               child: TextButton(
                 style: TextButton.styleFrom(
                   backgroundColor: _isRegisterButtonSelected
                       ? Colors.transparent
-                      : Colors.white,
+                      : Colors.grey.shade200,
                   foregroundColor:
                       _isRegisterButtonSelected ? Colors.white : Colors.black87,
                   padding: EdgeInsets.symmetric(vertical: 16),
-                  minimumSize: Size(double.infinity, 70),
+                  minimumSize: Size(double.infinity, 200),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(50),
                   ),

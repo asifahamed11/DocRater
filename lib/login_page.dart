@@ -1,11 +1,11 @@
 // Import necessary packages
 import 'dart:ui';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:app/UIhelper.dart'; // Custom UI helper class
 import 'package:app/signuppage.dart'; // Page for signing up
 import 'package:app/HomeView.dart'; // Home view after login
+import 'package:flutter_svg/svg.dart';
 import 'package:lottie/lottie.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -54,56 +54,78 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  // Build method to create the UI
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Login Page"), // App bar title
-        centerTitle: true,
+        leading: IconButton(
+          icon: SvgPicture.asset('assets/images/back_arrow.svg'),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          // Custom text field for email input
-          UiHelper.CustomTextfield(emailController, Icons.mail, "Email", false),
-          // Custom text field for password input
-          UiHelper.CustomTextfield(
-              passwordController, Icons.lock, "Password", true),
-          const SizedBox(
-            height: 10,
-          ),
-          // Custom button for login action
-          UiHelper.CustomButton(() {
-            Login(emailController.text.toString(),
-                passwordController.text.toString());
-          }, "Log In"),
-          const SizedBox(
-            height: 20,
-          ),
-          // Text and button for navigating to sign up page
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text(
-                "Don't have an account?",
-                style: TextStyle(fontSize: 15),
+      body: SingleChildScrollView(
+        // Wrap the Column with SingleChildScrollView
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              "   Welcome back.",
+              style: TextStyle(fontSize: 40),
+            ),
+            const SizedBox(height: 5),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: const Text(
+                "     You've been missed!",
+                style: TextStyle(fontSize: 25, color: Colors.black),
               ),
-              TextButton(
-                  onPressed: () {
-                    // Navigate to sign up page
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const SignupPage()));
-                  },
-                  child: const Text(
-                    "Register",
-                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
-                  ))
-            ],
-          )
-        ],
+            ),
+            const SizedBox(height: 50),
+            // Your existing UI elements here
+            UiHelper.CustomTextfield(
+                emailController, Icons.mail, "Email", false),
+            UiHelper.CustomTextfield(
+                passwordController, Icons.lock, "Password", true),
+            const SizedBox(height: 10),
+            // Text and button for navigating to sign up page
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  "Don't have an account?",
+                  style: TextStyle(fontSize: 15),
+                ),
+                TextButton(
+                    onPressed: () {
+                      // Navigate to sign up page
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const SignupPage()));
+                    },
+                    child: const Text(
+                      "Register",
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
+                    ))
+              ],
+            ),
+            const SizedBox(height: 100),
+            Center(
+              child: UiHelper.CustomButton(
+                () {
+                  Login(
+                    emailController.text.toString(),
+                    passwordController.text.toString(),
+                  );
+                },
+                "Log In",
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
