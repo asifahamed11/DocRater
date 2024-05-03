@@ -1,7 +1,10 @@
+import 'package:app/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:app/CatBlock.dart';
 import 'package:app/AddDoctorScreen.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:iconly/iconly.dart';
+import 'package:crystal_navigation_bar/crystal_navigation_bar.dart';
 
 class HomeView extends StatefulWidget {
   final String userName;
@@ -12,9 +15,19 @@ class HomeView extends StatefulWidget {
   _HomeViewState createState() => _HomeViewState();
 }
 
+enum _SelectedTab {
+  home,
+  search,
+  info,
+  profile,
+}
+
+_SelectedTab _selectedTab = _SelectedTab.home;
+
 class _HomeViewState extends State<HomeView>
     with AutomaticKeepAliveClientMixin, TickerProviderStateMixin {
   final TextEditingController _searchController = TextEditingController();
+  final FocusNode _searchFocusNode = FocusNode();
   List<Map<String, String>> filteredCategories = [];
   static const List<Map<String, String>> categories = [
     {"name": "Cardiology", "imageUrl": "card.jpg"},
@@ -160,15 +173,61 @@ class _HomeViewState extends State<HomeView>
     filteredCategories = categories;
   }
 
+  void _handleIndexChanged(int i) {
+    setState(() {
+      _selectedTab = _SelectedTab.values[i];
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
     return Scaffold(
+        extendBody: true,
+        bottomNavigationBar: Padding(
+          padding: const EdgeInsets.only(bottom: 10),
+          child: CrystalNavigationBar(
+            currentIndex: _SelectedTab.values.indexOf(_selectedTab),
+            height: 10,
+            unselectedItemColor: Colors.white70,
+            backgroundColor: Colors.black.withOpacity(0.1),
+            onTap: _handleIndexChanged,
+            items: [
+              /// Home
+              CrystalNavigationBarItem(
+                icon: IconlyBold.home,
+                unselectedIcon: IconlyLight.home,
+                selectedColor: Colors.white,
+              ),
+
+              /// Search
+              CrystalNavigationBarItem(
+                icon: IconlyBold.search,
+                unselectedIcon: IconlyLight.search,
+                selectedColor: Colors.white,
+              ),
+
+              /// About
+              CrystalNavigationBarItem(
+                icon: IconlyBold.info_circle,
+                unselectedIcon: IconlyLight.info_circle,
+                selectedColor: Colors.white,
+              ),
+
+              /// Profile
+              CrystalNavigationBarItem(
+                icon: IconlyBold.user_2,
+                unselectedIcon: IconlyLight.user,
+                selectedColor: Colors.white,
+              ),
+            ],
+          ),
+        ),
         backgroundColor: Colors.white,
         body: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [Colors.grey, Colors.white],
+              colors: [Colors.green.shade50, Colors.white],
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
             ),
@@ -190,7 +249,7 @@ class _HomeViewState extends State<HomeView>
 
   Widget _buildHeader() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 50),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 90),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -299,6 +358,15 @@ class _HomeViewState extends State<HomeView>
     );
   }
 
+  void _onSearchTextChanged(String value) {
+    setState(() {
+      filteredCategories = categories
+          .where((category) =>
+              category["name"]!.toLowerCase().contains(value.toLowerCase()))
+          .toList();
+    });
+  }
+
 /*
   Widget _buildAddDoctorButton() {
     return Center(
@@ -317,16 +385,8 @@ class _HomeViewState extends State<HomeView>
     );
   }
 */
-  void _onSearchTextChanged(String value) {
-    setState(() {
-      filteredCategories = categories
-          .where((category) =>
-              category["name"]!.toLowerCase().contains(value.toLowerCase()))
-          .toList();
-    });
-  }
 
-  void _navigateToAddDoctorScreen() {
+/*void _navigateToAddDoctorScreen() {
     Navigator.push(
       context,
       PageRouteBuilder(
@@ -349,8 +409,8 @@ class _HomeViewState extends State<HomeView>
         },
       ),
     );
-  }
+  }*/
 
   @override
-  bool get wantKeepAlive => true; // For AutomaticKeepAliveClientMixin
+  bool get wantKeepAlive => true;
 }
