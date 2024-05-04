@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:lottie/lottie.dart';
+import 'package:flutter_svg/svg.dart';
 
 const shadowColor = Color.fromRGBO(0, 0, 0, 0.35);
 
@@ -211,6 +212,12 @@ class _DrListState extends State<DrList> {
         value: DrListModel(),
         child: Scaffold(
           appBar: AppBar(
+            leading: IconButton(
+              icon: SvgPicture.asset('assets/images/back_arrow.svg'),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
             centerTitle: true,
             title: FittedBox(
               fit: BoxFit.contain,

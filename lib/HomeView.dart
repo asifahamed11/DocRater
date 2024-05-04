@@ -5,6 +5,7 @@ import 'package:app/AddDoctorScreen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
 import 'package:crystal_navigation_bar/crystal_navigation_bar.dart';
+import 'package:app/about_screen.dart';
 
 class HomeView extends StatefulWidget {
   final String userName;
@@ -177,6 +178,68 @@ class _HomeViewState extends State<HomeView>
     setState(() {
       _selectedTab = _SelectedTab.values[i];
     });
+
+    switch (_selectedTab) {
+      case _SelectedTab.profile:
+        Navigator.push(
+          context,
+          PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) {
+              return EditAccountPage();
+            },
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return FadeTransition(
+                opacity: animation,
+                child: child,
+              );
+            },
+            transitionDuration: Duration(milliseconds: 300),
+          ),
+        ).then((_) {
+          Future.delayed(Duration(milliseconds: 150), () {
+            setState(() {
+              _selectedTab = _SelectedTab.values[0];
+            });
+          });
+        });
+        break;
+      case _SelectedTab.info:
+        Navigator.push(
+          context,
+          PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) {
+              return AboutScreen();
+            },
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return FadeTransition(
+                opacity: animation,
+                child: child,
+              );
+            },
+            transitionDuration: Duration(milliseconds: 300),
+          ),
+        ).then((_) {
+          Future.delayed(Duration(milliseconds: 150), () {
+            setState(() {
+              _selectedTab = _SelectedTab.values[0];
+            });
+          });
+        });
+        break;
+      case _SelectedTab.search:
+        _searchFocusNode.requestFocus();
+        Future.delayed(Duration(milliseconds: 150), () {
+          setState(() {
+            _selectedTab = _SelectedTab.values[0];
+          });
+        });
+
+        break;
+      default:
+        break;
+    }
   }
 
   @override
@@ -295,6 +358,7 @@ class _HomeViewState extends State<HomeView>
         ),
         child: TextField(
           controller: _searchController,
+          focusNode: _searchFocusNode,
           onChanged: _onSearchTextChanged,
           decoration: InputDecoration(
             prefixIcon: Icon(Icons.search, color: Colors.black26),
