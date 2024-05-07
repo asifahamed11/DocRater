@@ -1,15 +1,32 @@
+import 'package:app/signuppage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:app/signuppage.dart'; // Page for signing up
-import 'package:app/login_page.dart'; // Login page widget
 import 'package:lottie/lottie.dart';
+
+import 'login_page.dart';
 
 // Constants
 const kHeadingText = "DocRater\nYour Healthcare Compass";
 const kBodyText =
     "Discover trusted doctors tailored to your needs. With DocRater, personalized care is just a tap away. Empowering you to make informed healthcare decisions.";
 
-class WelcomePage extends StatelessWidget {
+class WelcomePage extends StatefulWidget {
+  const WelcomePage({Key? key}) : super(key: key);
+
+  @override
+  _WelcomePageState createState() => _WelcomePageState();
+}
+
+class _WelcomePageState extends State<WelcomePage> {
+  bool _isRegisterButtonSelected = true;
+
+  void _navigateToPage(Widget page) {
+    Navigator.push(
+      context,
+      CupertinoPageRoute(builder: (context) => page),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,26 +45,22 @@ class WelcomePage extends StatelessWidget {
                         child: Lottie.asset('animations/welcome.json'),
                       ),
                     ),
-                    SizedBox(
-                      height: 20,
-                    ),
+                    const SizedBox(height: 20),
                     Text(
                       kHeadingText,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.black87,
                         fontSize: 34,
                         fontWeight: FontWeight.bold,
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    SizedBox(
-                      height: 10,
-                    ),
+                    const SizedBox(height: 10),
                     Container(
                       width: MediaQuery.of(context).size.width * 0.9,
                       child: Text(
                         kBodyText,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 15,
                           color: Colors.black,
                         ),
@@ -57,7 +70,21 @@ class WelcomePage extends StatelessWidget {
                   ],
                 ),
               ),
-              ButtonRow(),
+              ButtonRow(
+                isRegisterButtonSelected: _isRegisterButtonSelected,
+                onRegisterPressed: () {
+                  setState(() {
+                    _isRegisterButtonSelected = true;
+                  });
+                  _navigateToPage(SignupPage());
+                },
+                onSignInPressed: () {
+                  setState(() {
+                    _isRegisterButtonSelected = false;
+                  });
+                  _navigateToPage(LoginPage(userName: 'XXX'));
+                },
+              ),
             ],
           ),
         ),
@@ -66,13 +93,17 @@ class WelcomePage extends StatelessWidget {
   }
 }
 
-class ButtonRow extends StatefulWidget {
-  @override
-  _ButtonRowState createState() => _ButtonRowState();
-}
+class ButtonRow extends StatelessWidget {
+  final bool isRegisterButtonSelected;
+  final VoidCallback onRegisterPressed;
+  final VoidCallback onSignInPressed;
 
-class _ButtonRowState extends State<ButtonRow> {
-  bool _isRegisterButtonSelected = true;
+  const ButtonRow({
+    Key? key,
+    required this.isRegisterButtonSelected,
+    required this.onRegisterPressed,
+    required this.onSignInPressed,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -89,27 +120,19 @@ class _ButtonRowState extends State<ButtonRow> {
               width: MediaQuery.of(context).size.width * 0.9,
               child: TextButton(
                 style: TextButton.styleFrom(
-                  backgroundColor: _isRegisterButtonSelected
+                  backgroundColor: isRegisterButtonSelected
                       ? Colors.grey.shade200
                       : Colors.transparent,
                   foregroundColor:
-                      _isRegisterButtonSelected ? Colors.black87 : Colors.white,
-                  padding: EdgeInsets.symmetric(vertical: 16),
-                  minimumSize: Size(double.infinity, 200),
+                      isRegisterButtonSelected ? Colors.black87 : Colors.white,
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  minimumSize: const Size(double.infinity, 200),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),
                 ),
-                onPressed: () {
-                  setState(() {
-                    _isRegisterButtonSelected = true;
-                  });
-                  Navigator.push(
-                    context,
-                    CupertinoPageRoute(builder: (context) => SignupPage()),
-                  );
-                },
-                child: Text(
+                onPressed: onRegisterPressed,
+                child: const Text(
                   'Register',
                   style: TextStyle(
                     fontSize: 16,
@@ -124,31 +147,19 @@ class _ButtonRowState extends State<ButtonRow> {
               width: MediaQuery.of(context).size.width * 0.9,
               child: TextButton(
                 style: TextButton.styleFrom(
-                  backgroundColor: _isRegisterButtonSelected
+                  backgroundColor: isRegisterButtonSelected
                       ? Colors.transparent
                       : Colors.grey.shade200,
                   foregroundColor:
-                      _isRegisterButtonSelected ? Colors.white : Colors.black87,
-                  padding: EdgeInsets.symmetric(vertical: 16),
-                  minimumSize: Size(double.infinity, 200),
+                      isRegisterButtonSelected ? Colors.white : Colors.black87,
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  minimumSize: const Size(double.infinity, 200),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(50),
                   ),
                 ),
-                onPressed: () {
-                  setState(() {
-                    _isRegisterButtonSelected = false;
-                  });
-                  Navigator.push(
-                    context,
-                    CupertinoPageRoute(
-                      builder: (context) => LoginPage(
-                        userName: 'XXX',
-                      ),
-                    ),
-                  );
-                },
-                child: Text(
+                onPressed: onSignInPressed,
+                child: const Text(
                   'Sign In',
                   style: TextStyle(
                     fontSize: 16,

@@ -144,8 +144,8 @@ void showSuccessAnimation(BuildContext context) {
           child: ColorFiltered(
             colorFilter:
                 ColorFilter.mode(Colors.transparent, BlendMode.srcATop),
-            child: Lottie.asset(
-              'animations/login_successfully.json',
+            child: Image.asset(
+              'animations/login_successfully.gif',
               width: 200,
               height: 200,
             ),
@@ -159,7 +159,7 @@ void showSuccessAnimation(BuildContext context) {
 void showErrorAnimation(BuildContext context) {
   showDialog(
     context: context,
-    barrierColor: Colors.black
+    barrierColor: Colors.transparent
         .withOpacity(0.5), // Set the barrier color to a semi-transparent black
     builder: (context) {
       return Dialog(
@@ -167,14 +167,11 @@ void showErrorAnimation(BuildContext context) {
             .transparent, // Set the background color of the Dialog to transparent
         child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5), // Set the blur radius
-          child: ColorFiltered(
-            colorFilter:
-                ColorFilter.mode(Colors.transparent, BlendMode.srcATop),
-            child: Lottie.asset(
-              'animations/login_unsuccessful.json',
-              width: 200,
-              height: 200,
-            ),
+
+          child: Image.asset(
+            'animations/login_unsuccessful.gif',
+            width: 300,
+            height: 300,
           ),
         ),
       );
