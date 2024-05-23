@@ -1,5 +1,5 @@
 // Import necessary packages
-import 'package:app/welcome_page.dart';
+import 'package:app/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart'; // Importing Firebase Core package
 import 'package:flutter/material.dart';
 
@@ -23,12 +23,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       // MaterialApp widget for setting up the app
       debugShowCheckedModeBanner: false, // Disable debug banner
-      home: Builder(
-        // Builder widget to access context
-        builder: (context) => WelcomePage(
-            // Creating an instance of LoginPage widget with a default username
-            ),
-      ),
+      home: SplashScreen(),
     );
   }
 }

@@ -323,7 +323,7 @@ class _HomeViewState extends State<HomeView>
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(height: 10),
+          SizedBox(height: 1),
           Text(
             "Find your specialist",
             style: TextStyle(
@@ -339,10 +339,10 @@ class _HomeViewState extends State<HomeView>
 
   Widget _buildSearchField() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
+      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 1),
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 34),
-        height: 45,
+        height: 60,
         width: double.infinity,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(100),
@@ -373,9 +373,9 @@ class _HomeViewState extends State<HomeView>
 
   Widget _buildCategoriesGrid() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
             "Categories",
@@ -386,7 +386,7 @@ class _HomeViewState extends State<HomeView>
           ),
           SizedBox(height: 10),
           SizedBox(
-            height: 380, // Set a fixed height for the grid view
+            height: 440, // Set a fixed height for the grid view
             child: GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,

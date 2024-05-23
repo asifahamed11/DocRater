@@ -30,7 +30,7 @@ class _LoginPageState extends State<LoginPage> {
 
   // Async function to handle login process
   Future<void> Login(String email, String password) async {
-    if (email == "" && password == "") {
+    if (email.isEmpty || password.isEmpty) {
       return UiHelper.CustomAlertBox(context, "Enter Required Fields");
     } else {
       try {
@@ -82,13 +82,13 @@ class _LoginPageState extends State<LoginPage> {
                 style: TextStyle(fontSize: 25, color: Colors.black),
               ),
             ),
-            const SizedBox(height: 50),
+            const SizedBox(height: 40),
             // Your existing UI elements here
             UiHelper.CustomTextfield(
                 emailController, Icons.mail, "Email", false),
             UiHelper.CustomTextfield(
                 passwordController, Icons.lock, "Password", true),
-            const SizedBox(height: 10),
+            const SizedBox(height: 1),
             // Text and button for navigating to sign up page
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -112,7 +112,7 @@ class _LoginPageState extends State<LoginPage> {
                     ))
               ],
             ),
-            const SizedBox(height: 100),
+            const SizedBox(height: 1),
             Center(
               child: UiHelper.CustomButton(
                 () {
@@ -144,8 +144,8 @@ void showSuccessAnimation(BuildContext context) {
           child: ColorFiltered(
             colorFilter:
                 ColorFilter.mode(Colors.transparent, BlendMode.srcATop),
-            child: Image.asset(
-              'animations/login_successfully.gif',
+            child: Lottie.asset(
+              'animations/login_successfully.json',
               width: 200,
               height: 200,
             ),
@@ -168,10 +168,10 @@ void showErrorAnimation(BuildContext context) {
         child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5), // Set the blur radius
 
-          child: Image.asset(
-            'animations/login_unsuccessful.gif',
-            width: 300,
-            height: 300,
+          child: Lottie.asset(
+            'animations/login_unsuccessful.json',
+            width: 250,
+            height: 250,
           ),
         ),
       );

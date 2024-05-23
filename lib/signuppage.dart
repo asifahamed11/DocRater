@@ -100,7 +100,7 @@ class _SignupPageState extends State<SignupPage> {
               "   Register",
               style: TextStyle(fontSize: 40),
             ),
-            const SizedBox(height: 5),
+            const SizedBox(height: 1),
             Align(
               alignment: Alignment.centerLeft,
               child: const Text(
@@ -108,14 +108,14 @@ class _SignupPageState extends State<SignupPage> {
                 style: TextStyle(fontSize: 25, color: Colors.black),
               ),
             ),
-            const SizedBox(height: 50),
+            const SizedBox(height: 10),
             UiHelper.CustomTextfield(
                 nameController, Icons.person, "Name", false),
             UiHelper.CustomTextfield(
                 emailController, Icons.mail, "Email", false),
             UiHelper.CustomTextfield(
                 passwordController, Icons.lock, "Password", true),
-            const SizedBox(height: 10),
+            const SizedBox(height: 1),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -141,7 +141,7 @@ class _SignupPageState extends State<SignupPage> {
                 ),
               ],
             ),
-            const SizedBox(height: 100),
+            const SizedBox(height: 1),
             Center(
               child: UiHelper.CustomButton(
                 () {
