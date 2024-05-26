@@ -64,7 +64,7 @@ Here are some screenshots showcasing the app:
 
 This is the main screen, where the app entry point and Firebase Core initialization occur.
 
-<img src="https://github.com/asifahamed11/blob/master/screenshots/homeScreenShot.png" alt="Home Screen Screenshot" title="Home Screen Screenshot" width="200"/>
+<img src="https://github.com/asifahamed11/DocRater/blob/master/screenshots/homescreenshot.png" alt="Home Screen Screenshot" title="Home Screen Screenshot" width="200"/>
 
 This is the home screen, which serves as the app's entry point and initializes Firebase.
 
