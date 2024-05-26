@@ -64,9 +64,9 @@ Here are some screenshots showcasing the app:
 
 This is the main screen, where the app entry point and Firebase Core initialization occur.
 
-<img src="https://github.com/asifahamed11/DocRater/blob/master/screenshots/profileScreen.png" alt="Profile Screen Screenshot" title="Profile Screen Screenshot" width="200"/>
+<img src="https://github.com/asifahamed11/blob/master/screenshots/homeScreenShot.png" alt="Home Screen Screenshot" title="Home Screen Screenshot" width="200"/>
 
-This is the profile screen, where users can modify their account information.
+This is the home screen, which serves as the app's entry point and initializes Firebase.
 
 <img src="https://github.com/asifahamed11/DocRater/blob/master/screenshots/signupScreen.png" alt="Sign-up Screen Screenshot" title="Sign-up Screen Screenshot" width="200"/>
 
@@ -76,13 +76,6 @@ This is the sign-up screen, where new users can create accounts.
 
 This screenshot shows the doctor list screen, where users can search for doctors based on category, name, and other details.
 
-<img src="https://github.com/asifahamed11/blob/master/screenshots/homeScreenShot.png" alt="Home Screen Screenshot" title="Home Screen Screenshot" width="200"/>
-
-This is the home screen, which serves as the app's entry point and initializes Firebase.
-
-<img src="https://github.com/asifahamed11/blob/master/screenshots/aboutScreenShot.png" alt="About Screen Screenshot" title="About Screen Screenshot" width="200"/>
-
-This is the about screen, containing information about the app.
 
 ## Contributing
 
