@@ -58,23 +58,21 @@ To set up the app locally, follow these steps:
 
 ## Screenshots
 
-Here are some screenshots showcasing the app:
+<img src="https://github.com/asifahamed11/DocRater/blob/master/screenshots/mainScreenshot.png" alt="DocRater App Screenshot" title="DocRater App Screenshot" width="200"/>
 
-<img src="https://github.com/asifahamed11/DocRater/blob/master/screenshots/mainScreenshot.png" alt="Main Screen Screenshot" title="Main Screen Screenshot" width="200"/>
-
-This is the main screen, where the app entry point and Firebase Core initialization occur.
+The DocRater app's main screen options to register or sign in.
 
 <img src="https://github.com/asifahamed11/DocRater/blob/master/screenshots/homescreenshot.png" alt="Home Screen Screenshot" title="Home Screen Screenshot" width="200"/>
 
-This is the home screen, which serves as the app's entry point and initializes Firebase.
-
-<img src="https://github.com/asifahamed11/DocRater/blob/master/screenshots/signupScreen.png" alt="Sign-up Screen Screenshot" title="Sign-up Screen Screenshot" width="200"/>
-
-This is the sign-up screen, where new users can create accounts.
+The home screen displays categories of medical specialties for users to browse and search for doctors.
 
 <img src="https://github.com/asifahamed11/DocRater/blob/master/screenshots/DrListScreen.png" alt="Doctor List Screen Screenshot" title="Doctor List Screen Screenshot" width="200"/>
 
-This screenshot shows the doctor list screen, where users can search for doctors based on category, name, and other details.
+The doctor list screen shows search results for doctors in a specific specialty, such as dermatology. It provides detailed information about each doctor, including their qualifications, practice hours, and contact details.
+
+<img src="https://github.com/asifahamed11/DocRater/blob/master/screenshots/signupScreen.png" alt="Sign-up Screen Screenshot" title="Sign-up Screen Screenshot" width="200"/>
+
+The sign-up screen allows new users to create an account by providing their name, email, and password.
 
 
 ## Contributing
